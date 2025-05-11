@@ -1,0 +1,42 @@
+<%= form_with(model: attendance_confirmation) do |form| %>
+  <% if attendance_confirmation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(attendance_confirmation.errors.count, "error") %> prohibited this attendance_confirmation from being saved:</h2>
+
+      <ul>
+        <% attendance_confirmation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :member_id, style: "display: block" %>
+    <%= form.text_field :member_id %>
+  </div>
+
+  <div>
+    <%= form.label :meeting_id, style: "display: block" %>
+    <%= form.text_field :meeting_id %>
+  </div>
+
+  <div>
+    <%= form.label :confirmed, style: "display: block" %>
+    <%= form.check_box :confirmed %>
+  </div>
+
+  <div>
+    <%= form.label :attendance_type, style: "display: block" %>
+    <%= form.number_field :attendance_type %>
+  </div>
+
+  <div>
+    <%= form.label :deleted_at, style: "display: block" %>
+    <%= form.datetime_field :deleted_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,50 @@
+# Force text files to always use LF (Unix) line endings
+* text=auto eol=lf
+
+# Specify binary files to avoid messing up line endings
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.mov binary
+*.mp4 binary
+*.zip binary
+*.gz binary
+
+# Ruby and Rails specific
+*.rb text
+*.rake text
+*.yml text
+*.yaml text
+*.json text
+*.html text
+*.css text
+*.scss text
+*.sass text
+*.js text
+*.ts text
+*.vue text
+*.erb text
+*.haml text
+*.slim text
+*.md text
+*.txt text
+*.graphql text
+*.gql text
+
+# Database schema and seeds
+db/schema.rb text
+db/seeds.rb text
+
+# Docker and environment files
+*.env text
+Dockerfile text
+docker-compose.yml text
+
+# Ignore secrets (you shouldn't commit real ones)
+config/master.key text
+config/credentials.yml.enc text
+config/credentials/*.yml.enc diff=rails_credentials
+config/credentials.yml.enc diff=rails_credentials

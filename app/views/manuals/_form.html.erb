@@ -1,0 +1,42 @@
+<%= form_with(model: manual) do |form| %>
+  <% if manual.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(manual.errors.count, "error") %> prohibited this manual from being saved:</h2>
+
+      <ul>
+        <% manual.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :team_id, style: "display: block" %>
+    <%= form.text_field :team_id %>
+  </div>
+
+  <div>
+    <%= form.label :type, style: "display: block" %>
+    <%= form.number_field :type %>
+  </div>
+
+  <div>
+    <%= form.label :url, style: "display: block" %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :deleted_at, style: "display: block" %>
+    <%= form.datetime_field :deleted_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

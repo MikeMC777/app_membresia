@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @attendance_confirmation %>
+
+<div>
+  <%= link_to "Edit this attendance confirmation", edit_attendance_confirmation_path(@attendance_confirmation) %> |
+  <%= link_to "Back to attendance confirmations", attendance_confirmations_path %>
+
+  <%= button_to "Destroy this attendance confirmation", @attendance_confirmation, method: :delete %>
+</div>

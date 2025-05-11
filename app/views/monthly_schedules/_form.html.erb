@@ -1,0 +1,52 @@
+<%= form_with(model: monthly_schedule) do |form| %>
+  <% if monthly_schedule.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(monthly_schedule.errors.count, "error") %> prohibited this monthly_schedule from being saved:</h2>
+
+      <ul>
+        <% monthly_schedule.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :created_by_id, style: "display: block" %>
+    <%= form.text_field :created_by_id %>
+  </div>
+
+  <div>
+    <%= form.label :scheduled_month, style: "display: block" %>
+    <%= form.text_field :scheduled_month %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :due_date, style: "display: block" %>
+    <%= form.date_field :due_date %>
+  </div>
+
+  <div>
+    <%= form.label :deleted_at, style: "display: block" %>
+    <%= form.datetime_field :deleted_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

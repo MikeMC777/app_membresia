@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Manuals</h1>
+
+<div id="manuals">
+  <% @manuals.each do |manual| %>
+    <%= render manual %>
+    <p>
+      <%= link_to "Show this manual", manual %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New manual", new_manual_path %>

@@ -1,0 +1,42 @@
+<%= form_with(model: file_upload) do |form| %>
+  <% if file_upload.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(file_upload.errors.count, "error") %> prohibited this file_upload from being saved:</h2>
+
+      <ul>
+        <% file_upload.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :size, style: "display: block" %>
+    <%= form.number_field :size %>
+  </div>
+
+  <div>
+    <%= form.label :url, style: "display: block" %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div>
+    <%= form.label :folder_id, style: "display: block" %>
+    <%= form.text_field :folder_id %>
+  </div>
+
+  <div>
+    <%= form.label :deleted_at, style: "display: block" %>
+    <%= form.datetime_field :deleted_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

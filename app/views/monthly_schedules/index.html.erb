@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Monthly schedules</h1>
+
+<div id="monthly_schedules">
+  <% @monthly_schedules.each do |monthly_schedule| %>
+    <%= render monthly_schedule %>
+    <p>
+      <%= link_to "Show this monthly schedule", monthly_schedule %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New monthly schedule", new_monthly_schedule_path %>
