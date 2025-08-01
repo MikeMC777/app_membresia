@@ -35,6 +35,25 @@ gem 'sendgrid', '~> 1.2.4'
 gem 'sprockets', '~> 3.7.2'
 gem 'sprockets-rails'
 
+# Añadir la gema diff-lcs
+gem 'diff-lcs', '~> 1.6.1'
+
+# Gemas específicas para resolver warnings
+gem 'connection_pool', '~> 2.5.3'
+gem 'base64', '~> 0.2.0'
+gem 'drb', '~> 2.2.3'
+gem 'mutex_m', '~> 0.3.0'
+gem 'bigdecimal', '~> 3.1.9'
+gem 'logger', '>= 1.7.0'
+gem 'nokogiri', '>= 1.18.8'
+gem 'racc', '>= 1.8.1'
+gem 'rack', '>= 2.2.4', '< 3.0'
+gem 'loofah', '~> 2.24.1'
+gem 'rails-dom-testing', '~> 2.3.0'
+gem 'rake', '>= 13.2.1'
+gem 'zeitwerk', '~> 2.7.3'
+gem 'irb', '>= 1.15.2'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -48,7 +67,7 @@ group :development, :test do
   gem 'bullet', github: 'flyerhzm/bullet'
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
   gem 'pry-byebug', '~> 3.7', platform: :mri
-  gem 'rspec-rails', '~> 3.9'
+  gem 'rspec-rails', '~> 6.0'
 end
 
 group :development do
@@ -66,12 +85,12 @@ end
 
 group :test do
   gem 'faker', '~> 2.7'
+  gem 'minitest', '~> 5.25.5'
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'shoulda-matchers', '~> 4.1', '>= 4.1.2'
   gem 'simplecov', '~> 0.13.0', require: false
   gem 'webmock', '~> 3.7', '>= 3.7.6'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

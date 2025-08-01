@@ -6,6 +6,7 @@ class ApplicationPolicy
     @record = record
   end
 
+  # Por defecto todo está denegado
   def index?
     false
   end
@@ -34,18 +35,17 @@ class ApplicationPolicy
     false
   end
 
+  # Clase anidada Scope
   class Scope
+    attr_reader :user, :scope
+
     def initialize(user, scope)
       @user = user
       @scope = scope
     end
 
     def resolve
-      scope.all
+      scope.none # Por defecto no se muestra nada
     end
-
-    private
-
-    attr_reader :user, :scope
   end
 end

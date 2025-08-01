@@ -1,5 +1,5 @@
 class MemberPolicy < ApplicationPolicy
-  # Solo Secretario y Administrador pueden ver la lista de miembros
+  # Acciones permitidas
   def index?
     user.admin? || user.secretary?
   end
@@ -23,5 +23,15 @@ class MemberPolicy < ApplicationPolicy
   def reactivate?
     user.admin? || user.secretary?
   end
-end
 
+  # Scope para limitar los resultados de index
+  class Scope < Scope
+    def resolve
+      if user.admin? || user.secretary?
+        scope.all
+      else
+        scope.none
+      end
+    end
+  end
+end

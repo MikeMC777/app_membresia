@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :teams
   resources :attendances
   resources :events
-  resources :members
+  resources :members do
+    member do
+      patch :reactivate
+    end
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

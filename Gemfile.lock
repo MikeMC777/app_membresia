@@ -12,9 +12,9 @@ GIT
 
 GIT
   remote: https://github.com/flyerhzm/bullet.git
-  revision: 38054276c9a6cb824bd166cbadd959032264259b
+  revision: 355b82db10eb4105322a326a785ed16ec86aede5
   specs:
-    bullet (8.0.5)
+    bullet (8.0.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
 
@@ -116,18 +116,18 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.3)
     aws-eventstream (1.3.2)
-    aws-partitions (1.1092.0)
-    aws-sdk-core (3.222.2)
+    aws-partitions (1.1106.0)
+    aws-sdk-core (3.224.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
       base64
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-kms (1.99.0)
+    aws-sdk-kms (1.101.0)
       aws-sdk-core (~> 3, >= 3.216.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.183.0)
+    aws-sdk-s3 (1.186.1)
       aws-sdk-core (~> 3, >= 3.216.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
@@ -141,7 +141,7 @@ GEM
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
     bigdecimal (3.1.9)
-    bootsnap (1.18.4)
+    bootsnap (1.18.6)
       msgpack (~> 1.2)
     brakeman (4.10.1)
     builder (3.3.0)
@@ -155,7 +155,7 @@ GEM
     codeclimate-engine-rb (0.4.2)
     coderay (1.1.3)
     concurrent-ruby (1.3.5)
-    connection_pool (2.5.2)
+    connection_pool (2.5.3)
     crack (1.0.0)
       bigdecimal
       rexml
@@ -178,14 +178,14 @@ GEM
       bcrypt (~> 3.0)
       devise (> 3.5.2, < 5)
       rails (>= 4.2.0, < 8.1)
-    diff-lcs (1.6.1)
+    diff-lcs (1.6.2)
     docile (1.1.5)
     domain_name (0.6.20240107)
     dotenv (3.1.8)
     dotenv-rails (3.1.8)
       dotenv (= 3.1.8)
       railties (>= 6.1)
-    drb (2.2.1)
+    drb (2.2.3)
     erubi (1.13.1)
     erubis (2.7.0)
     factory_bot (5.2.0)
@@ -223,7 +223,7 @@ GEM
     ffi (1.17.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    hashdiff (1.1.2)
+    hashdiff (1.2.0)
     http-cookie (1.0.8)
       domain_name (~> 0.5)
     i18n (1.14.7)
@@ -234,7 +234,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
-    json (2.11.3)
+    json (2.12.0)
     jsonapi-renderer (0.2.2)
     jwt (2.10.1)
       base64
@@ -261,7 +261,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    loofah (2.24.0)
+    loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -273,20 +273,20 @@ GEM
       rest-client (~> 2.0.2)
     marcel (1.0.4)
     method_source (1.1.0)
-    mime-types (3.6.2)
+    mime-types (3.7.0)
       logger
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2025.0422)
+      mime-types-data (~> 3.2025, >= 3.2025.0507)
+    mime-types-data (3.2025.0520)
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
     mini_mime (1.1.5)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     multipart-post (2.4.1)
     mutex_m (0.3.0)
-    net-imap (0.5.7)
+    net-imap (0.5.8)
       date
       net-protocol
     net-pop (0.1.2)
@@ -331,7 +331,7 @@ GEM
     pundit-matchers (1.6.0)
       rspec-rails (>= 3.0.0)
     racc (1.8.1)
-    rack (2.2.13)
+    rack (2.2.16)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-session (1.0.2)
@@ -355,7 +355,7 @@ GEM
       activesupport (= 7.1.5.1)
       bundler (>= 1.15.0)
       railties (= 7.1.5.1)
-    rails-dom-testing (2.2.0)
+    rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
@@ -404,24 +404,24 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.4.1)
-    rouge (4.5.1)
-    rspec-core (3.9.3)
-      rspec-support (~> 3.9.3)
-    rspec-expectations (3.9.4)
+    rouge (4.5.2)
+    rspec-core (3.13.3)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.4)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.9.0)
-    rspec-mocks (3.9.1)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.4)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.9.0)
-    rspec-rails (3.9.1)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 3.9.0)
-      rspec-expectations (~> 3.9.0)
-      rspec-mocks (~> 3.9.0)
-      rspec-support (~> 3.9.0)
-    rspec-support (3.9.4)
+      rspec-support (~> 3.13.0)
+    rspec-rails (6.1.5)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.3)
     rubocop (1.7.0)
       parallel (~> 1.10)
       parser (>= 2.7.1.5)
@@ -467,7 +467,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
-    uniform_notifier (1.16.0)
+    uniform_notifier (1.17.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     webmock (3.25.1)
@@ -479,7 +479,7 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.7.2)
+    zeitwerk (2.7.3)
 
 PLATFORMS
   ruby
@@ -489,26 +489,37 @@ DEPENDENCIES
   active_storage_base64 (~> 2.0)
   annotate (~> 3.0, >= 3.0.3)
   aws-sdk-s3 (~> 1)
+  base64 (~> 0.2.0)
   better_errors (~> 2.5, >= 2.5.1)
+  bigdecimal (~> 3.1.9)
   bootsnap (~> 1.4, >= 1.4.5)
   brakeman (~> 4.7, >= 4.7.1)
   bullet!
+  connection_pool (~> 2.5.3)
   delayed_job_active_record (~> 4.1, >= 4.1.4)
   devise (~> 4.9)
   devise-security
   devise_token_auth (~> 1.1, >= 1.1.3)
+  diff-lcs (~> 1.6.1)
   dotenv-rails
   draper!
+  drb (~> 2.2.3)
   factory_bot_rails (~> 5.1, >= 5.1.1)
   faker (~> 2.7)
   faraday
   faraday_middleware
+  irb (>= 1.15.2)
   jwt
   kaminari
   letter_opener (~> 1.7)
   listen (~> 3.2)
+  logger (>= 1.7.0)
+  loofah (~> 2.24.1)
   mailgun-ruby (~> 1.1.6)
   mimemagic (~> 0.3.10)
+  minitest (~> 5.25.5)
+  mutex_m (~> 0.3.0)
+  nokogiri (>= 1.18.8)
   oj (~> 3.9, >= 3.9.2)
   paranoia
   pg (~> 1.1, >= 1.1.4)
@@ -518,11 +529,15 @@ DEPENDENCIES
   puma (~> 4.3)
   pundit
   pundit-matchers (~> 1.6.0)
+  racc (>= 1.8.1)
+  rack (>= 2.2.4, < 3.0)
   rack-cors (~> 1.0, >= 1.0.6)
   rails (~> 7.1.2)
+  rails-dom-testing (~> 2.3.0)
   rails_best_practices (~> 1.19.4)
+  rake (>= 13.2.1)
   reek (~> 5.5)
-  rspec-rails (~> 3.9)
+  rspec-rails (~> 6.0)
   rubocop-rails (~> 2.3, >= 2.3.2)
   sendgrid (~> 1.2.4)
   shoulda-matchers (~> 4.1, >= 4.1.2)
@@ -533,6 +548,7 @@ DEPENDENCIES
   sprockets-rails
   tzinfo-data
   webmock (~> 3.7, >= 3.7.6)
+  zeitwerk (~> 2.7.3)
 
 RUBY VERSION
    ruby 3.2.2p53

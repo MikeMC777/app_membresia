@@ -9,7 +9,7 @@ class Member < ApplicationRecord
   has_many :tasks_assigned, class_name: 'Task', foreign_key: :assigned_to_id, dependent: :nullify
 
   has_many :attendances, dependent: :destroy
-  has_many :meeting_confirmations, dependent: :destroy
+  has_many :attendance_confirmations, dependent: :destroy
   has_many :task_comments, dependent: :destroy
 
   has_one :user, dependent: :destroy
@@ -23,6 +23,9 @@ class Member < ApplicationRecord
   enum gender: { male: 0, female: 1 }
   enum status: { active: 0, inactive: 1, sympathizer: 2 }
 
+  # Callbacks
+  after_initialize :set_default_status, if: :new_record?
+
   # Métodos útiles
   def full_name
     [first_name, second_name, first_surname, second_surname].compact.join(" ")
@@ -30,6 +33,14 @@ class Member < ApplicationRecord
 
   def active?
     status == "active"
+  end
+
+  def set_default_status
+    self.status ||= :sympathizer
+  end
+
+  def must_start_as_sympathizer
+    errors.add(:status, "debe iniciar como simpatizante") unless status == "sympathizer"
   end
 end
 
