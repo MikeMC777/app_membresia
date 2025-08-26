@@ -1,0 +1,32 @@
+es:
+  activerecord:
+    attributes:
+      member:
+        statuses:
+          active:      "Activo"
+          inactive:    "Inactivo"
+          sympathizer: "Simpatizante"
+        genders:
+          male:   "Masculino"
+          female: "Femenino"
+        marital_statuses:
+          single:   "Soltero/a"
+          married:  "Casado/a"
+          divorced: "Divorciado/a"
+          widowed:  "Viudo/a"
+          common_law_marriage: "Unión Libre"
+    errors:
+      models:
+        member:
+          attributes:
+            first_name:
+              blank: "no puede estar en blanco"
+              too_long: "es demasiado largo (máximo %{count} caracteres)"
+            first_surname:
+              blank: "no puede estar en blanco"
+              too_long: "es demasiado largo (máximo %{count} caracteres)"
+            email:
+              blank: "no puede estar en blanco"
+              too_long: "es demasiado largo (máximo %{count} caracteres)"
+              invalid: "no es un correo electrónico válido"
+              taken: "ya está registrado"

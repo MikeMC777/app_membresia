@@ -1,51 +1,41 @@
 class User < ApplicationRecord
-  # Devise modules, según los habilitados
+  include DeviseTokenAuth::Concerns::User
+  # Devise modules (ajustá según lo que uses realmente)
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :confirmable
 
-  belongs_to :member
+  belongs_to :member, inverse_of: :user
 
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
 
-  has_many :team_roles, dependent: :destroy
-  has_many :teams, through: :team_roles
+  validates :member, presence: true
 
-  # Helpers para roles globales
-  def has_role?(role_name)
-    roles.any? { |role| role.name == role_name.to_s }
+  # Roles globales
+
+  # Cache ligero de nombres de rol para evitar múltiples queries
+  def global_role_names
+    @global_role_names ||= roles.pluck(:name)
+  end
+
+  def has_global_role?(role_name)
+    global_role_names.include?(role_name.to_s)
   end
 
   def admin?
-    has_role?("admin")
+    has_global_role?("admin")
   end
 
   def secretary?
-    has_role?("secretary")
+    has_global_role?("secretary")
   end
 
   def programmer?
-    has_role?("programmer")
+    has_global_role?("programmer")
   end
 
-  # Helpers para roles por equipo
-  def role_in_team(team)
-    team_roles.find_by(team: team)&.role
-  end
-
-  def encargado_de?(team)
-    role_in_team(team) == "encargado"
-  end
-
-  def asistente_de?(team)
-    role_in_team(team) == "asistente"
-  end
-
-  def auxiliar_de?(team)
-    role_in_team(team) == "auxiliar"
-  end
-
-  def integrante_de?(team)
-    role_in_team(team) == "integrante"
+  def need_change_password?
+    false
   end
 end

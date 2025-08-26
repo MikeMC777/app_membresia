@@ -2,10 +2,10 @@ module Api
   module V1
     class ApiController < ApplicationController
       include Api::Concerns::ActAsApiRequest
-      include Api::Concerns::Response
       include DeviseTokenAuth::Concerns::SetUserByToken
-      include Pundit
+      include Pundit::Authorization
 
+      before_action :set_current_user
       before_action :authenticate_user!, except: :status
       before_action :need_change_password?, except: :status
       after_action :verify_authorized, except: :index
@@ -18,7 +18,6 @@ module Api
       rescue_from AbstractController::ActionNotFound,  with: :render_not_found
       rescue_from ActionController::ParameterMissing,  with: :render_parameter_missing
       rescue_from Pundit::NotAuthorizedError,          with: :user_not_authorized
-      rescue_from ArgumentError,                       with: :render_argument_error
 
       def status
         render json: { online: true }
@@ -28,7 +27,26 @@ module Api
         # something
       end
 
+      def skip_bullet
+        previous_value = Bullet.enable?
+        Bullet.enable = false
+        yield
+      ensure
+        Bullet.enable = previous_value
+      end
+
+      def set_current_user
+        Current.user = current_user
+      end
+
       private
+
+      def authorize_with_permission(permission)
+        return if current_user.super_admin?
+
+        policy = PermissionsPolicy.new(current_user, nil)
+        raise Pundit::NotAuthorizedError unless policy.allow_permission?(permission)
+      end
 
       def need_change_password?
         return unless current_user.need_change_password?
@@ -68,11 +86,6 @@ module Api
       def user_not_authorized(exception)
         logger.info(exception) # for logging
         render json: { error: I18n.t('api.errors.not_authorized') }, status: :forbidden
-      end
-
-      def render_argument_error(exception)
-        logger.info(exception) # for logging
-        render json: { error: exception.message }, status: :bad_request
       end
     end
   end

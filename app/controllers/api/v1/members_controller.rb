@@ -1,84 +1,89 @@
 module Api
   module V1
-    class MembersController < Api::V1::ApiController
-      include Pundit::Authorization
-      before_action :set_member, only: %i[show edit update destroy reactivate]
+    class MembersController < ApiController
+      before_action :set_member, only: %i[show update destroy reactivate]
+      after_action  :verify_authorized, except: :index
+      after_action  :verify_policy_scoped, only: :index
 
-      # GET /members
       def index
         authorize Member
-        if params[:status].present?
-          @members = policy_scope(Member).where(status: params[:status]).order(:created_at)
-        else
-          @members = policy_scope(Member).order(:created_at)
-        end
+        members = policy_scope(Member)
+                  .filter_by(index_filter_params)
+                  .order(:first_name)
+
+        render json: members,
+               each_serializer: MemberSerializer,
+               include_team_roles: include_team_roles?
       end
 
-      # GET /members/1
+
       def show
-        authorize @member  # Verificación de permisos en 'show'
+        authorize @member
+        render json: @member
       end
 
-      # GET /members/new
-      def new
-        @member = Member.new
-        authorize @member  # Verificación de permisos para crear
-      end
-
-      # GET /members/1/edit
-      def edit
-        authorize @member  # Verificación de permisos para crear
-      end
-
-      # POST /members
       def create
         @member = Member.new(member_params)
         authorize @member
-
         if @member.save
-          redirect_to @member, notice: "Member was successfully created."
+          render json: @member, status: :created
         else
-          render :new, status: :unprocessable_entity
+          render json: { errors: @member.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
-      # PATCH/PUT /members/1
       def update
-        authorize @member  # Verificación de permisos para editar
+        authorize @member
         if @member.update(member_params)
-          redirect_to @member, notice: "Member was successfully updated.", status: :see_other
+          render json: @member, status: :ok
         else
-          render :edit, status: :unprocessable_entity
+          render json: { errors: @member.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
-      # DELETE /members/1
       def destroy
-        authorize @member  # Verificación de permisos para eliminar (soft delete)
-        @member.destroy!
-        redirect_to members_url, notice: "Member was successfully destroyed.", status: :see_other
+        authorize @member
+        @member.destroy
+        head :no_content
       end
 
       def reactivate
         authorize @member, :reactivate?
-        if @member.inactive?
+        if @member.deleted?
+          @member.restore(recursive: false)
+          render json: @member, status: :ok
+        elsif @member.inactive?
           @member.update(status: :active)
-          redirect_to @member, notice: "Member was successfully reactivated."
+          render json: @member, status: :ok
         else
-          redirect_to @member, alert: "Only inactive members can be reactivated."
+          render json: { error: "Member is already active" }, status: :unprocessable_entity
         end
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_member
-          @member = Member.find(params[:id])
-        end
 
-        # Only allow a list of trusted parameters through.
-        def member_params
-          params.require(:member).permit(:first_name, :second_name, :first_surname, :second_surname, :email, :phone, :status, :birth_date, :baptism_date, :marital_status, :gender, :wedding_date, :membership_date, :address, :city, :state, :country, :deleted_at)
-        end
+      def set_member
+        @member = action_name == "reactivate" ? Member.with_deleted.find(params[:id]) : Member.find(params[:id])
+      end
+
+      def member_params
+        params.require(:member).permit(
+          :first_name, :second_name, :first_surname, :second_surname,
+          :email, :phone, :status, :birth_date, :baptism_date,
+          :marital_status, :gender, :wedding_date, :membership_date,
+          :address, :city, :state, :country
+        )
+      end
+
+      def include_team_roles?
+        ActiveModel::Type::Boolean.new.cast(params[:include_team_roles])
+      end
+
+      # Sólo permitimos los parámetros que el policy deja usar
+      def index_filter_params
+        allowed = MemberPolicy.new(current_user, Member).allowed_filters
+        params.permit(allowed + %i[include_team_roles])
+      end
     end
   end
 end
